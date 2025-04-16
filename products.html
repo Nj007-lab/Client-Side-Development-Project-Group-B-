@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - YUVO</title>
+    <!-- Bootstrap 5.3.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        /* Navbar styles */
+        .navbar-custom {
+            background-color: hsla(207, 73%, 49%, 0.982);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-custom .navbar-brand img {
+            height: 40px;
+        }
+        .navbar-custom .nav-link {
+            color: #ffffff;
+            font-weight: 500;
+        }
+        .navbar-custom .nav-link:hover, .navbar-custom .nav-link.active {
+            color: #000000;
+        }
+        .navbar-custom .cart-icon {
+            position: relative;
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+        .navbar-custom .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: hsla(207, 73%, 49%, 0.982);
+            color: white;
+            padding: 4rem 0;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+        .page-header p {
+            font-size: 1.1rem;
+        }
+        .breadcrumb a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: #cccccc;
+        }
+
+        /* Product Section */
+        .product-card {
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .badge-sale {
+            background: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+        .badge-new {
+            background: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+
+        /* Sidebar Filters */
+        .filter-card h6 {
+            color: #d76722;
+        }
+        .filter-card .btn-primary {
+            background-color: hsla(207, 73%, 49%, 0.982);
+            border: none;
+        }
+        .filter-card .btn-primary:hover {
+            background-color: #005a99;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            padding: 2rem 0;
+            color: #cccccc;
+        }
+        .footer a {
+            color: #cccccc;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            color: #ffffff;
+        }
+        .footer h5 {
+            color: #d76722;
+        }
+
+        /* Animations */
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-pop-in {
+            animation: popIn 0.5s ease-out;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" alt="YUVO Logo">  
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center ms-3">
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <a href="#" class="btn btn-outline-light btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header text-white">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h1 class="fw-bold">Our Products</h1>
+                    <p>Discover our wide range of high-quality products</p>
+                </div>
+                <div class="col-lg-4">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-lg-end bg-transparent">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Products</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <!-- Sidebar Filters -->
+                    <div class="card filter-card mb-4 border-0 shadow-sm animate-fade-in">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0">Filters</h5>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="mb-3">Categories</h6>
+                            <div class="list-group list-group-flush">
+                                <a href="#" class="list-group-item list-group-item-action active">All Categories</a>
+                                <a href="#" class="list-group-item list-group-item-action">Electronics</a>
+                                <a href="#" class="list-group-item list-group-item-action">Fashion</a>
+                                <a href="#" class="list-group-item list-group-item-action">Home & Garden</a>
+                            </div>
+                            
+                            <hr class="my-4">
+                            
+                            <h6 class="mb-3">Price Range</h6>
+                            <div class="range-slider mb-3">
+                                <input type="range" class="form-range" min="0" max="1000" step="10" id="priceRange">
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>$0</span>
+                                <span>$1000</span>
+                            </div>
+                            
+                            <hr class="my-4">
+                            
+                            <h6 class="mb-3">Brands</h6>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="brand1">
+                                <label class="form-check-label" for="brand1">Sony</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="brand2">
+                                <label class="form-check-label" for="brand2">Samsung</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="brand3">
+                                <label class="form-check-label" for="brand3">Apple</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="brand4">
+                                <label class="form-check-label" for="brand4">Nike</label>
+                            </div>
+                            
+                            <button class="btn btn-primary w-100 mt-3">Apply Filters</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Featured Product -->
+                    <div class="card border-0 shadow-sm animate-fade-in">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0">Featured</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="images/earbuds.png" alt="Featured Product" class="img-fluid mb-3">
+                            <h6>Premium Wireless Earbuds</h6>
+                            <div class="text-warning small mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="text-primary fw-bold">$129.99</p>
+                            <a href="product-detail.html" class="btn btn-sm btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-9">
+                    <!-- Sorting and View Options -->
+                    <div class="card mb-4 border-0 shadow-sm">
+                        <div class="card-body py-2">
+                            <div class="row align-items-center">
+                                <div class="col-md-4 mb-2 mb-md-0">
+                                    <p class="mb-0">Showing 1-12 of 48 products</p>
+                                </div>
+                                <div class="col-md-5 mb-2 mb-md-0">
+                                    <div class="d-flex align-items-center">
+                                        <label class="me-2 mb-0">Sort by:</label>
+                                        <select class="form-select form-select-sm">
+                                            <option>Featured</option>
+                                            <option>Price: Low to High</option>
+                                            <option>Price: High to Low</option>
+                                            <option>Newest</option>
+                                            <option>Best Selling</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="btn-group float-md-end">
+                                        <button class="btn btn-outline-secondary active"><i class="fas fa-th"></i></button>
+                                        <button class="btn btn-outline-secondary"><i class="fas fa-list"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Grid -->
+                    <div class="row g-4">
+                        <!-- Product 1 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card product-card h-100 border-0 shadow-sm animate-pop-in">
+                                <div class="badge-sale position-absolute top-0 start-0 m-2">Sale</div>
+                                <img src="images/phone.png" class="card-img-top" alt="Smartphone">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="card-title">Smartphone X</h5>
+                                        <div class="text-warning">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-muted">Latest model with 128GB storage</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <span class="text-decoration-line-through text-muted me-2">$1199</span>
+                                            <span class="fw-bold text-primary">$250-850</span>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary add-to-cart" data-id="5">
+                                            <i class="fas fa-cart-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 2 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card product-card h-100 border-0 shadow-sm animate-pop-in" style="animation-delay: 0.1s;">
+                                <img src="images/shoes.png" class="card-img-top" alt="Running Shoes">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="card-title">Running Shoes</h5>
+                                        <div class="text-warning">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-muted">Lightweight and comfortable</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold text-primary">$89.99</span>
+                                        <button class="btn btn-sm btn-outline-primary add-to-cart" data-id="6">
+                                            <i class="fas fa-cart-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 3 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card product-card h-100 border-0 shadow-sm animate-pop-in" style="animation-delay: 0.2s;">
+                                <div class="badge-new position-absolute top-0 start-0 m-2">New</div>
+                                <img src="images/coffe.png" class="card-img-top" alt="Coffee Maker">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="card-title">Coffee Maker</h5>
+                                        <div class="text-warning">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                    < o:p>
+                                    <p class="card-text text-muted">Programmable 12-cup coffee maker</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold text-primary">$49.99</span>
+                                        <button class="btn btn-sm btn-outline-primary add-to-cart" data-id="7">
+                                            <i class="fas fa-cart-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 4 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card product-card h-100 border-0 shadow-sm animate-pop-in" style="animation-delay: 0.3s;">
+                                <img src="images/tv.png" class="card-img-top" alt="Smart TV">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="card-title">Smart TV 55"</h5>
+                                        <div class="text-warning">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-muted">4K UHD with HDR and smart features</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold text-primary">$699.99</span>
+                                        <button class="btn btn-sm btn-outline-primary add-to-cart" data-id="8">
+                                            <i class="fas fa-cart-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 5 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card product-card h-100 border-0 shadow-sm animate-pop-in" style="animation-delay: 0.4s;">
+                                <img src="images/matt.png" class="card-img-top" alt="Yoga Mat">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="card-title">Premium Yoga Mat</h5>
+                                        <div class="text-warning">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-muted">Eco-friendly and non-slip</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold text-primary">$34.99</span>
+                                        <button class="btn btn-sm btn-outline-primary add-to-cart" data-id="9">
+                                            <i class="fas fa-cart-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 6 -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card product-card h-100 border-0 shadow-sm animate-pop-in" style="animation-delay: 0.5s;">
+                                <div class="badge-sale position-absolute top-0 start-0 m-2">Sale</div>
+                                <img src="images/speaker.png" class="card-img-top" alt="Bluetooth Speaker">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="card-title">Bluetooth Speaker</h5>
+                                        <div class="text-warning">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-muted">Portable with 20-hour battery life</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <span class="text-decoration-line-through text-muted me-2">$79.99</span>
+                                            <span class="fw-bold text-primary">$59.99</span>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary add-to-cart" data-id="10">
+                                            <i class="fas fa-cart-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <nav aria-label="Page navigation" class="mt-5">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5>YUVO</h5>
+                    <p>Your partner for unforgettable shopping experiences.</p>
+                    <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 123 Travel St, </li>
+                        <li><i class="fas fa-phone me-2"></i> (123) 456-7890</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@yuvoshop.com</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="text-center mb-0">© 2025 YUVO. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>
